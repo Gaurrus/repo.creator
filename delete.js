@@ -1,20 +1,22 @@
 const { Octokit } = require('@octokit/rest');
 
+require('dotenv').config();
+
 let octokit = new Octokit({
-  auth: '',
+  auth: process.env.TOKEN2,
 });
 
-function delay() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve('');
-    }, 1000);
-  });
-}
+// function delay() {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve('');
+//     }, 1000);
+//   });
+// }
 
 async function main() {
-  for (let i = 1; i <= 149; ++i) {
-    await delay();
+  for (let i = 1346; i <= 1495; ++i) {
+    // await delay();
     try {
       await octokit.rest.repos.delete({
         owner: 'ClevertecTest',
