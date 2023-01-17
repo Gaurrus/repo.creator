@@ -3,7 +3,7 @@ const { Octokit } = require('@octokit/rest');
 require('dotenv').config();
 
 let octokit = new Octokit({
-  auth: process.env.TOKEN2,
+  auth: process.env.TOKEN1,
 });
 
 // function delay() {
@@ -15,14 +15,14 @@ let octokit = new Octokit({
 // }
 
 async function main() {
-  for (let i = 1346; i <= 1495; ++i) {
+  for (let i = 1; i <= 133; ++i) {
     // await delay();
     try {
       await octokit.rest.repos.delete({
         owner: 'ClevertecTest',
-        repo: `test_${i}`,
+        repo: `test-${i}`,
       });
-      console.log(`Repository test_${i} deleted`);
+      console.log(`Repository test-${i} deleted`);
     } catch (e) {
       console.log('error', e);
     }
