@@ -24,18 +24,18 @@ async function main() {
   while (i <= 1) {
     try {
       await octokit.rest.repos.createUsingTemplate({
-        template_owner: 'ClevertecTest',
-        template_repo: 'templateTest',
-        owner: 'ClevertecTest',
-        name: `test-${i}`,
+        template_owner: 'ClevertecFrontendLab',
+        template_repo: 'sprint2',
+        owner: 'ClevertecFrontendLab',
+        name: `sprint2-test-lab`,
       });
 
-      await octokit.rest.repos.addCollaborator({
-        owner: 'ClevertecTest',
-        repo: `test-${i}`,
-        username: 'GarrusClassroom',
-        permission: 'push',
-      });
+      // await octokit.rest.repos.addCollaborator({
+      //   owner: 'ClevertecTest',
+      //   repo: `test-${i}`,
+      //   username: 'GarrusClassroom',
+      //   permission: 'push',
+      // });
 
       console.log(`Repository test-${i} created`);
       i++;
