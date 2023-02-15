@@ -1,4 +1,5 @@
 const { Octokit } = require('@octokit/rest');
+const { default: axios } = require('axios');
 
 require('dotenv').config();
 
@@ -8,14 +9,14 @@ let octokit = new Octokit({
 
 async function addCall() {
   try {
-    const data = await octokit.rest.repos.addCollaborator({
-      owner: 'ClevertecTest',
+    const {
+      data: { name },
+    } = await octokit.rest.repos.get({
+      owner: process.env.ORG,
       repo: 'testSprint3-Gaurrus',
-      username: 'Gaurrus',
-      permission: 'push',
     });
 
-    console.log(data);
+    console.log(name);
   } catch (e) {
     console.log(e);
   }

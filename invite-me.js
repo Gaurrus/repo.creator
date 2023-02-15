@@ -1,6 +1,7 @@
 'use strict';
 
 const { Octokit } = require('@octokit/rest');
+const { default: axios } = require('axios');
 
 require('dotenv').config();
 
@@ -16,7 +17,6 @@ async function addCall() {
 
     const result = data.map(({ name }) => name);
 
-    // console.log(data);
     console.log(result.find((name) => name.includes('tests')));
   } catch (e) {
     console.log(e);
