@@ -2,45 +2,38 @@ const { Octokit } = require('@octokit/rest');
 
 require('dotenv').config();
 
-const AUTH = [
-  {
-    auth: process.env.TOKEN1,
-  },
-  {
-    auth: process.env.TOKEN2,
-  },
-];
+let i = 0;
 
-let n = 0;
+let octokit = new Octokit({
+  auth: process.env.TOKEN1,
+});
 
-let i = 1;
-
-let octokit = new Octokit(AUTH[1]);
+const PEOPLE = ['ValadzkoAliaksei', 'Gaurrus'];
 
 const getTimestamp = (seconds) =>
   new Date(new Date(seconds * 1000) - new Date()).getMinutes();
 
 async function main() {
-  while (i <= 1) {
+  while (i <= PEOPLE.length - 1) {
     try {
       await octokit.rest.repos.createUsingTemplate({
-        template_owner: 'ClevertecFrontendLab',
-        template_repo: 'sprint2',
-        owner: 'ClevertecFrontendLab',
-        name: `sprint2-test-lab`,
+        template_owner: process.env.PROD_ORG || 'ClevertecTest',
+        template_repo: 'sprint3',
+        owner: process.env.PROD_ORG,
+        name: PEOPLE[i],
       });
 
-      // await octokit.rest.repos.addCollaborator({
-      //   owner: 'ClevertecTest',
-      //   repo: `test-${i}`,
-      //   username: 'GarrusClassroom',
-      //   permission: 'push',
-      // });
+      await octokit.rest.repos.update({
+        owner: process.env.PROD_ORG || 'ClevertecTest',
+        repo: PEOPLE[i],
+        private: true,
+      });
 
-      console.log(`Repository test-${i} created`);
+      console.log(`Repository ${PEOPLE[i]} created - private`);
       i++;
     } catch (e) {
       console.log(e);
+      console.log(`Stopped on ${PEOPLE[i]}`);
       break;
     }
   }

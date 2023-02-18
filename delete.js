@@ -6,17 +6,23 @@ let octokit = new Octokit({
   auth: process.env.TOKEN1,
 });
 
+const PEOPLE = ['ValadzkoAliaksei', 'Gaurrus'];
+
+let i = 0;
 
 async function main() {
-  for (let i = 134; i <= 150; ++i) {
+  while (i <= PEOPLE.length - 1) {
     try {
       await octokit.rest.repos.delete({
-        owner: 'ClevertecTest',
-        repo: `test-${i}`,
+        owner: process.env.PROD_ORG,
+        repo: PEOPLE[i],
       });
-      console.log(`Repository test-${i} deleted`);
+      console.log(`Repository ${PEOPLE[i]} deleted`);
+      i++;
     } catch (e) {
       console.log('error', e);
+      console.log(`Stopped on ${PEOPLE[i]}`);
+      break;
     }
   }
 
