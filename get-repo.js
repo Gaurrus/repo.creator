@@ -7,13 +7,13 @@ let octokit = new Octokit({
   auth: process.env.TOKEN1,
 });
 
-async function addCall() {
+async function getRepo() {
   try {
     const {
       data: { name },
     } = await octokit.rest.repos.get({
-      owner: process.env.ORG,
-      repo: 'testSprint3-Gaurrus',
+      owner: process.env.PROD_ORG,
+      repo: 'Gaurrus',
     });
 
     console.log(name);
@@ -22,4 +22,4 @@ async function addCall() {
   }
 }
 
-addCall();
+getRepo();
